@@ -577,7 +577,7 @@ sch_custom <- function(
         err_fn("coerce")
     }
     if (!is.function(msg) || length(formals(msg)) != 1) {
-        rlang::abort("{.arg {arg}} must be a function with one argument `type`.")
+        rlang::abort("{.arg msg} must be a function with one argument `type`.")
     }
 
     extras = rlang::list2(...)
