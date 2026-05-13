@@ -573,11 +573,11 @@ sch_custom <- function(
     if (!is.function(check) || length(formals(check)) != 2) {
         err_fn("check")
     }
-    if (!is.function(msg) || length(formals(msg)) != 1) {
-        err_fn("msg")
-    }
     if (!is.function(coerce) || length(formals(coerce)) != 2) {
         err_fn("coerce")
+    }
+    if (!is.function(msg) || length(formals(msg)) != 1) {
+        rlang::abort("{.arg {arg}} must be a function with one argument `type`.")
     }
 
     extras = rlang::list2(...)

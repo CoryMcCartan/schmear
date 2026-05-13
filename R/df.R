@@ -38,7 +38,7 @@ NULL
 #' @rdname sch_df
 #' @export
 new_sch_df <- function(data, schema, groups = NULL, class = NULL, use_tbl = TRUE) {
-    assert(inherits(data, "data.frame"), "{.arg data} must be a data frame")
+    assert(is.list(data), "{.arg data} must be a data frame or list")
     assert(inherits(schema, "sch_schema"), "{.arg schema} must be a {.cls sch_schema}")
 
     if (isTRUE(use_tbl)) {
