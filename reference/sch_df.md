@@ -131,5 +131,4 @@ str(d)
 #>   .. .. .. ..$ name: chr "parameter"
 #>   ..- attr(*, "desc")= chr "MCMC draws"
 #>   ..- attr(*, "class")= chr "sch_schema"
-#>  - attr(*, "sch_groups")= NULL
 ```

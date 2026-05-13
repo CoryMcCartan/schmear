@@ -11,6 +11,7 @@ You can install the development version of schmear from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("CoryMcCartan/schmear")
 ```

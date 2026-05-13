@@ -5,12 +5,14 @@
 **Full test suite:**
 
 ``` r
+
 devtools::test()
 ```
 
 **Single test file or context:**
 
 ``` r
+
 devtools::test(filter = "schema")     # test-schema.R
 devtools::test(filter = "validate")   # test-validate.R
 ```
@@ -18,12 +20,14 @@ devtools::test(filter = "validate")   # test-validate.R
 **Generate documentation from roxygen:**
 
 ``` r
+
 devtools::document()
 ```
 
 **Full package check (runs R CMD CHECK equivalent):**
 
 ``` r
+
 devtools::check()
 ```
 
@@ -93,6 +97,7 @@ frame subtypes. It has three core layers:
 Every type in `type_fns` has this structure:
 
 ``` r
+
 type_name = list(
     check = function(x, type) { ... },      # Returns TRUE/FALSE; must handle NA gracefully
     msg = function(type) { ... },           # Returns human-readable type description

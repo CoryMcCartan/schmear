@@ -16,14 +16,14 @@ Each method calls
 against the schema, running only the checks that can plausibly be
 violated by that type of operation:
 
-|                             |                                                  |
-|-----------------------------|--------------------------------------------------|
-| Operation                   | Checks run                                       |
-| `dplyr_row_slice`           | none by default; `"relationships"` behind a flag |
-| `dplyr_col_modify`          | `"names"`, `"types"`, `"distinct"`               |
-| `dplyr_reconstruct`         | `"names"`, `"types"`                             |
-| `[` (1-d column subsetting) | `"names"`                                        |
-| `names<-`                   | errors if any *schema* column name is changed    |
+|  |  |
+|----|----|
+| Operation | Checks run |
+| `dplyr_row_slice` | none by default; `"relationships"` behind a flag |
+| `dplyr_col_modify` | `"names"`, `"types"`, `"distinct"` |
+| `dplyr_reconstruct` | `"names"`, `"types"` |
+| `[` (1-d column subsetting) | `"names"` |
+| `names<-` | errors if any *schema* column name is changed |
 
 ## Row slicing (`arrange`, `filter`, `slice`, semi/anti joins)
 
