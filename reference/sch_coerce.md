@@ -1,9 +1,8 @@
 # Coerce a data frame to conform to a schema
 
-Attempts to coerce each column of `data` to the type expected by
-`schema`, using the coercion method defined for each column type. After
-coercion, optionally validates the result with
-[`sch_validate()`](http://corymccartan.com/schmear/reference/sch_validate.md).
+Attempts to coerce each column of \`data\` to the type expected by
+\`schema\`, using the coercion method defined for each column type.
+After coercion, optionally validates the result with \[sch_validate()\].
 
 ## Usage
 
@@ -15,8 +14,7 @@ sch_coerce(schema, data, validate = TRUE, call = rlang::caller_env())
 
 - schema:
 
-  A schema object created by
-  [`sch_schema()`](http://corymccartan.com/schmear/reference/sch_schema.md).
+  A schema object created by \[sch_schema()\].
 
 - data:
 
@@ -24,49 +22,38 @@ sch_coerce(schema, data, validate = TRUE, call = rlang::caller_env())
 
 - validate:
 
-  If `TRUE` (default),
-  [`sch_validate()`](http://corymccartan.com/schmear/reference/sch_validate.md)
-  is called on the coerced data after all columns have been processed.
-  Set to `FALSE` to skip validation, which can be useful when you want
-  to inspect the coerced result before checking constraints.
+  If \`TRUE\` (default), \[sch_validate()\] is called on the coerced
+  data after all columns have been processed. Set to \`FALSE\` to skip
+  validation, which can be useful when you want to inspect the coerced
+  result before checking constraints.
 
 - call:
 
   The environment or call used for error reporting, passed to
-  [`rlang::abort()`](https://rlang.r-lib.org/reference/abort.html).
-  Useful when wrapping `sch_coerce()` inside another function so that
-  errors point to the right place.
+  \[rlang::abort()\]. Useful when wrapping \`sch_coerce()\` inside
+  another function so that errors point to the right place.
 
 ## Value
 
-`data` with columns coerced to their schema types, invisibly, if
+\`data\` with columns coerced to their schema types, invisibly, if
 coercion succeeds. If any column cannot be coerced, an error of class
-`sch_coercion_error` is raised with a summary of all failures. When
-`validate = TRUE`, a subsequent
-[`sch_validate()`](http://corymccartan.com/schmear/reference/sch_validate.md)
-call may also raise a `sch_validation_error` if the coerced data still
-violates schema constraints (e.g., out-of-bounds values or uniqueness
-violations).
+\`sch_coercion_error\` is raised with a summary of all failures. When
+\`validate = TRUE\`, a subsequent \[sch_validate()\] call may also raise
+a \`sch_validation_error\` if the coerced data still violates schema
+constraints (e.g., out-of-bounds values or uniqueness violations).
 
 ## Details
 
-Coercion is applied column-by-column using the `coerce` function
-registered for each type in the internal `type_fns` registry. For
-example, a column specified as
-[`sch_integer()`](http://corymccartan.com/schmear/reference/sch_schema.md)
-will be coerced with
-[`as.integer()`](https://rdrr.io/r/base/integer.html). Nested schemas
-(created with
-[`sch_nest()`](http://corymccartan.com/schmear/reference/sch_schema.md))
-are handled by recursing into each element data frame, and grouped
-columns (created with
-[`sch_multiple()`](http://corymccartan.com/schmear/reference/sch_schema.md))
-have each member column coerced individually.
+Coercion is applied column-by-column using the \`coerce\` function
+registered for each type in the internal \`type_fns\` registry. For
+example, a column specified as \`sch_integer()\` will be coerced with
+\[as.integer()\]. Nested schemas (created with \[sch_nest()\]) are
+handled by recursing into each element data frame, and grouped columns
+(created with \[sch_multiple()\]) have each member column coerced
+individually.
 
-Columns present in `data` but not named in `schema` (i.e., those covered
-by
-[`sch_others()`](http://corymccartan.com/schmear/reference/sch_schema.md))
-are left untouched.
+Columns present in \`data\` but not named in \`schema\` (i.e., those
+covered by \[sch_others()\]) are left untouched.
 
 ## Examples
 

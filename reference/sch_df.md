@@ -2,10 +2,9 @@
 
 Bare-bones constructor for a data frame with an attached schema. This
 function should be called by package developers writing their own
-internal constructors. The only checks are for the types of `data` and
-`schema`. The `validate_sch_df()` is a lightweight wrapper around
-[`sch_validate()`](http://corymccartan.com/schmear/reference/sch_validate.md)
-that also returns the input.
+internal constructors. The only checks are for the types of \`data\` and
+\`schema\`. The \`validate_sch_df()\` is a lightweight wrapper around
+\[sch_validate()\] that also returns the input.
 
 ## Usage
 
@@ -23,12 +22,12 @@ validate_sch_df(x)
 
 - schema:
 
-  A `sch_schema` object.
+  A \`sch_schema\` object.
 
 - groups:
 
   A named list of character vectors of column names, for use with
-  [`sch_multiple()`](http://corymccartan.com/schmear/reference/sch_schema.md).
+  \[sch_multiple()\].
 
 - class:
 
@@ -37,19 +36,19 @@ validate_sch_df(x)
 
 - use_tbl:
 
-  If `TRUE`, the returned object will have tibble classes `tbl_df` and
-  `tbl` in addition to `data.frame`. As a reminder, `tbl_df` affects the
-  behavior of the object (slicing, row names, etc.), while `tbl` affects
-  printing only.
+  If \`TRUE\`, the returned object will have tibble classes \`tbl_df\`
+  and \`tbl\` in addition to \`data.frame\`. As a reminder, \`tbl_df\`
+  affects the behavior of the object (slicing, row names, etc.), while
+  \`tbl\` affects printing only.
 
 - x:
 
-  A `sch_df` object.
+  A \`sch_df\` object.
 
 ## Value
 
-A data frame with class `c(class, "sch_df", ...)` and attributes
-`sch_schema` and `sch_groups`.
+A data frame with class \`c(class, "sch_df", ...)\` and attributes
+\`sch_schema\` and \`sch_groups\`.
 
 The input, if validation is successful.
 

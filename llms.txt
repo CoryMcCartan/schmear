@@ -7,8 +7,15 @@ through common data frame manipulations.
 
 ## Installation
 
-You can install the development version of schmear from
-[GitHub](https://github.com/) with:
+You can install the released version of schmear from CRAN with:
+
+``` r
+
+install.packages("schmear")
+```
+
+You can install the development version from
+[GitHub](https://github.com/CoryMcCartan/schmear) with:
 
 ``` r
 

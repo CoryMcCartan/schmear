@@ -107,30 +107,29 @@ sch_custom(
 
 - ...:
 
-  Column specifications, in the form of `col_name = col_type` pairs,
-  where `col_type` is a call to a column type constructor listed here,
-  such as `sch_numeric()`. Every type must be a kind of vector, i.e.,
-  [`vctrs::obj_is_vector()`](https://vctrs.r-lib.org/reference/vector-checks.html)
-  must return `TRUE`.
+  Column specifications, in the form of \`col_name = col_type\` pairs,
+  where \`col_type\` is a call to a column type constructor listed here,
+  such as \`sch_numeric()\`. Every type must be a kind of vector, i.e.,
+  \[vctrs::obj_is_vector()\] must return \`TRUE\`.
 
-  All columns must be named, except for `sch_others()`, as described
-  below, and `sch_multiple()`, which describes a group of columns
-  sharing the same type. A named `sch_nest()` describes columns stored
+  All columns must be named, except for \`sch_others()\`, as described
+  below, and \`sch_multiple()\`, which describes a group of columns
+  sharing the same type. A named \`sch_nest()\` describes columns stored
   as a nested data frame.
 
-  The special function `sch_others()` indicates the preferred location
+  The special function \`sch_others()\` indicates the preferred location
   of other columns not explicitly mentioned in the schema. If no
-  `sch_others()` appears, then other columns are not allowed. Trailing
+  \`sch_others()\` appears, then other columns are not allowed. Trailing
   commas are permitted.
 
 - .relationships:
 
   An optional one-sided formula describing the structural relationships
   between values in different columns. Formulas can only involve named
-  arguments to `...`. Use `*` to signify crossed levels, which will
-  verify all combinations exist, `/` to signify nested levels, and `+`
-  to create compound keys (bundling columns into a single identifier).
-  See the examples below.
+  arguments to \`...\`. Use \`\*\` to signify crossed levels, which will
+  verify all combinations exist, \`/\` to signify nested levels, and
+  \`+\` to create compound keys (bundling columns into a single
+  identifier). See the examples below.
 
 - desc, .desc:
 
@@ -138,24 +137,24 @@ sch_custom(
   contraints will be described separately and do not need to be included
   in the description. For example for "age", the description might be
   "Age of the patient in years", not "Non-negative integer representing
-  the age of the patient in years". For the overall `sch_schema`, the
-  `desc` will be printed as part of the header for data frames
+  the age of the patient in years". For the overall \`sch_schema\`, the
+  \`desc\` will be printed as part of the header for data frames
   implementing the schema, by default.
 
 - missing:
 
-  If `TRUE`, the column may be contain missing values. Otherwise, any
+  If \`TRUE\`, the column may be contain missing values. Otherwise, any
   missing values result in an error.
 
 - required:
 
-  If `TRUE` (default), the group entry in `sch_groups` must contain at
-  least one column name. If `FALSE`, an empty character vector for that
-  entry is also accepted.
+  If \`TRUE\` (default), the group entry in \`sch_groups\` must contain
+  at least one column name. If \`FALSE\`, an empty character vector for
+  that entry is also accepted.
 
 - distinct:
 
-  If `TRUE`, the column must contain no duplicate values (after
+  If \`TRUE\`, the column must contain no duplicate values (after
   accounting for nesting structure).
 
 - name:
@@ -164,7 +163,7 @@ sch_custom(
 
 - type:
 
-  A column type constructor (e.g. `sch_numeric()`) specifying the
+  A column type constructor (e.g. \[sch_numeric()\]) specifying the
   expected type of every column in the group.
 
 - check:
@@ -186,7 +185,7 @@ sch_custom(
 
 - bounds:
 
-  Length-two vector `c(min, max)` specifying the allowed range of
+  Length-two vector \`c(min, max)\` specifying the allowed range of
   values.
 
 - closed:
@@ -201,8 +200,8 @@ sch_custom(
 
 - strict:
 
-  If `TRUE`, only factors with the specified levels are accepted. If
-  `FALSE`, character vectors with the specified levels are also
+  If \`TRUE\`, only factors with the specified levels are accepted. If
+  \`FALSE\`, character vectors with the specified levels are also
   accepted.
 
 - class:
@@ -211,7 +210,7 @@ sch_custom(
 
 ## Value
 
-An object of class `sch_schema`,
+An object of class \`sch_schema\`,
 
 ## Functions
 
@@ -221,20 +220,20 @@ An object of class `sch_schema`,
 - `sch_any()`: A column of any type. No type checking is performed.
 
 - `sch_multiple()`: A group of multiple columns sharing the same type.
-  The group is identified by `name`, which must appear as an entry in
-  the `sch_groups` attribute of the data frame being validated. That
+  The group is identified by \`name\`, which must appear as an entry in
+  the \`sch_groups\` attribute of the data frame being validated. That
   entry is a character vector of column names that belong to this group.
 
-  Optionally accepts cross-column `check`, `msg`, and `coerce` functions
-  that are applied to the entire group after per-column type checks
-  pass. These must all be provided together or not at all.
+  Optionally accepts cross-column \`check\`, \`msg\`, and \`coerce\`
+  functions that are applied to the entire group after per-column type
+  checks pass. These must all be provided together or not at all.
 
-  `sch_multiple()` must be unnamed in an `sch_schema()` call. Per-column
-  constraints such as `missing` and `distinct` are set on the inner
-  `type` argument.
+  \`sch_multiple()\` must be unnamed in an \`sch_schema()\` call.
+  Per-column constraints such as \`missing\` and \`distinct\` are set on
+  the inner \`type\` argument.
 
 - `sch_nest()`: A set of columns stored as a nested list-column of data
-  frames. Must be given a name in the outer `sch_schema()`.
+  frames. Must be given a name in the outer \`sch_schema()\`.
 
 - `sch_numeric()`: A numeric vector that is optionally constrained to be
   within a certain range.
@@ -254,16 +253,16 @@ An object of class `sch_schema`,
 - `sch_datetime()`: A POSIXct vector that is optionally constrained to
   be within a certain range.
 
-- `sch_inherits()`: A list-column whose elements satisfy
-  `inherits(_, class)`.
+- `sch_inherits()`: A list-column whose elements satisfy \`inherits(\_,
+  class)\`.
 
-- `sch_list_of()`: A vector satisfying `inherits(_, class)`.
+- `sch_list_of()`: A vector satisfying \`inherits(\_, class)\`.
 
 - `sch_custom()`: A custom type defined by user-provided check, type
   message, and coercion functions. Additional named values to be stored
-  along with the type specification may be passed via `...` and will be
-  available to the check, message, and coercion function as elements of
-  the `type` argument.
+  along with the type specification may be passed via \`...\` and will
+  be available to the check, message, and coercion function as elements
+  of the \`type\` argument.
 
 ## Examples
 

@@ -19,8 +19,7 @@ sch_validate(
 
 - schema:
 
-  A schema object created by
-  [`sch_schema()`](http://corymccartan.com/schmear/reference/sch_schema.md).
+  A schema object created by \[sch_schema()\].
 
 - data:
 
@@ -29,31 +28,25 @@ sch_validate(
 - check:
 
   A character vector specifying which checks to perform. The default
-  runs all checks. Possible values:
-
-  - `"names"`: check for missing required columns and unexpected extra
-    columns.
-
-  - `"types"`: check column types and missing-value (`NA`) constraints.
-
-  - `"distinct"`: check uniqueness constraints for columns marked
-    `distinct = TRUE`. Relatively expensive.
-
-  - `"relationships"`: validate relationship formulas (primary-key
-    uniqueness and crossing/nesting completeness). Relatively expensive.
+  runs all checks. Possible values: - \`"names"\`: check for missing
+  required columns and unexpected extra columns. - \`"types"\`: check
+  column types and missing-value (\`NA\`) constraints. - \`"distinct"\`:
+  check uniqueness constraints for columns marked \`distinct = TRUE\`.
+  Relatively expensive. - \`"relationships"\`: validate relationship
+  formulas (primary-key uniqueness and crossing/nesting completeness).
+  Relatively expensive.
 
 - call:
 
   The environment or call used for error reporting, passed to
-  [`rlang::abort()`](https://rlang.r-lib.org/reference/abort.html).
-  Useful when wrapping `sch_validate()` inside another function so that
-  the error points to the right place.
+  \[rlang::abort()\]. Useful when wrapping \`sch_validate()\` inside
+  another function so that the error points to the right place.
 
 ## Value
 
-`data`, invisibly, if validation succeeds. Otherwise, an error of class
-`sch_validation_error` is raised with a formatted summary of all issues
-found.
+\`data\`, invisibly, if validation succeeds. Otherwise, an error of
+class \`sch_validation_error\` is raised with a formatted summary of all
+issues found.
 
 ## Examples
 
