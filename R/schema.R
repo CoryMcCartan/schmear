@@ -38,6 +38,22 @@
 #'   accounting for nesting structure).
 #'
 #' @returns An object of class `sch_schema`,
+#'
+#' @section Worked examples:
+#' Three larger end-to-end example scripts are bundled with the package and
+#' show how to build a schema, attach group metadata, validate a compliant
+#' data frame, and exercise a range of corruption cases. List them with:
+#'
+#' ```r
+#' list.files(system.file("examples", package = "schmear"), full.names = TRUE)
+#' ```
+#'
+#' The included scripts are `mcmc_draws.R` (fully-crossed MCMC posterior
+#' draws), `ei_spec.R` (an ecological-inference specification using
+#' [sch_multiple()] groups with a row-sum cross-column check), and
+#' `election_data.R` (tidy election returns with a compound primary key and
+#' nested/crossed relationship structure).
+#'
 #' @examples
 #' sch_schema(
 #'     .desc = "MCMC draws",

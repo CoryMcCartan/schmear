@@ -1,4 +1,4 @@
-# Example: Ecological inference specification (ei_spec)
+# Example: Ecological inference specification (matching 'seine' package)
 #
 # An ei_spec data frame has one row per geographic unit (e.g., county).
 # It contains:
@@ -10,10 +10,8 @@
 # The sch_groups attribute maps group names ("predictors", "outcomes") to
 # the actual column names in the data frame. Cross-column checks enforce that
 # both groups sum to 1 in every row.
-#
-# Reference: /Users/cmccartan/Documents/Work/Research/ei/seine/R/ei_spec.R
 
-devtools::load_all()
+library(schmear)
 
 # Schema -----------------------------------------------------------------------
 
@@ -67,7 +65,6 @@ df <- data.frame(
     pres_rep = out_shares[, 2],
     pres_other = out_shares[, 3],
     total = as.integer(runif(n_units, 500, 50000)),
-    # optional covariate
     income_med = runif(n_units, 30000, 120000)
 )
 class(df) <- c("ei_spec", "sch_df", "tbl_df", "tbl", "data.frame")
@@ -89,71 +86,44 @@ cat("OK\n")
 cat("\n--- Corruption 1: missing sch_groups attribute ---\n")
 bad1 <- df
 attr(bad1, "sch_groups") <- NULL
-tryCatch(
-    sch_validate(schema, bad1),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad1))
 
 cat("\n--- Corruption 2: predictor column out of [0, 1] bounds ---\n")
 bad2 <- df
-bad2$vap_white[1] <- 1.5 # exceeds upper bound
-tryCatch(
-    sch_validate(schema, bad2),
-    error = function(e) message(conditionMessage(e))
-)
+bad2$vap_white[1] <- 1.5
+try(sch_validate(schema, bad2))
 
 cat("\n--- Corruption 3: predictor shares do not sum to 1 ---\n")
 bad3 <- df
-bad3$vap_white[1] <- 0.1 # no longer sums to 1
-tryCatch(
-    sch_validate(schema, bad3),
-    error = function(e) message(conditionMessage(e))
-)
+bad3$vap_white[1] <- 0.1
+try(sch_validate(schema, bad3))
 
 cat("\n--- Corruption 4: missing 'total' column ---\n")
 bad4 <- df[, setdiff(names(df), "total")]
 attr(bad4, "sch_groups") <- attr(df, "sch_groups")
-tryCatch(
-    sch_validate(schema, bad4),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad4))
 
 cat("\n--- Corruption 5: total contains zero (below lower bound of 1) ---\n")
 bad5 <- df
 bad5$total[1] <- 0L
-tryCatch(
-    sch_validate(schema, bad5),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad5))
 
 cat("\n--- Corruption 6: predictor column contains NA ---\n")
 bad6 <- df
 bad6$vap_white[1] <- NA_real_
-tryCatch(
-    sch_validate(schema, bad6),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad6))
 
 cat("\n--- Corruption 7: sch_groups references a column not present in data ---\n")
 bad7 <- df[, setdiff(names(df), "vap_white")]
-attr(bad7, "sch_groups") <- attr(df, "sch_groups") # still claims vap_white
-tryCatch(
-    sch_validate(schema, bad7),
-    error = function(e) message(conditionMessage(e))
-)
+attr(bad7, "sch_groups") <- attr(df, "sch_groups")
+try(sch_validate(schema, bad7))
 
 cat("\n--- Corruption 8: outcomes group absent from sch_groups ---\n")
 bad8 <- df
 attr(bad8, "sch_groups") <- list(predictors = c("vap_white", "vap_black", "vap_other"))
-tryCatch(
-    sch_validate(schema, bad8),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad8))
 
 cat("\n--- Corruption 9: outcomes are character, not numeric ---\n")
 bad9 <- df
 bad9$pres_dem <- as.character(bad9$pres_dem)
-tryCatch(
-    sch_validate(schema, bad9),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad9))

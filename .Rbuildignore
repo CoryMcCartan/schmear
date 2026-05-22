@@ -7,7 +7,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^man/logo\.png$
 ^SUGGESTIONS\.md$
 ^REVIEW\.md$
 ^TODO\.md$

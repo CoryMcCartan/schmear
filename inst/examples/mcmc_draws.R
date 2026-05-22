@@ -1,9 +1,9 @@
 # Example: MCMC draws schema
 #
-# Structure: chain × draw × param fully crossed
+# Structure: chain x draw x param fully crossed.
 # Every (chain, draw, param) combination exists exactly once.
 
-devtools::load_all()
+library(schmear)
 
 # Schema -----------------------------------------------------------------------
 
@@ -38,13 +38,12 @@ draws_df$chain <- as.integer(draws_df$chain)
 draws_df$draw <- as.integer(draws_df$draw)
 draws_df$param <- factor(draws_df$param, levels = params)
 draws_df$value <- c(
-    rnorm(n_chains * n_draws), # mu draws
-    rnorm(n_chains * n_draws * 20, 0, 0.5), # beta draws
-    abs(rnorm(n_chains * n_draws, 1, 0.2)), # sigma draws (positive)
-    rnorm(n_chains * n_draws, -200, 10) # log_lik draws
+    rnorm(n_chains * n_draws),                  # mu draws
+    rnorm(n_chains * n_draws * 20, 0, 0.5),     # beta draws
+    abs(rnorm(n_chains * n_draws, 1, 0.2)),     # sigma draws (positive)
+    rnorm(n_chains * n_draws, -200, 10)         # log_lik draws
 )
 
-# Reorder to chain/draw/param order
 draws_df <- draws_df[order(draws_df$chain, draws_df$draw, draws_df$param), ]
 rownames(draws_df) <- NULL
 
@@ -59,48 +58,32 @@ cat("OK\n")
 cat("\n--- Corruption 1: wrong type for 'value' (character instead of numeric) ---\n")
 bad1 <- draws_df
 bad1$value <- as.character(bad1$value)
-tryCatch(
-    sch_validate(schema, bad1),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad1))
 
 cat("\n--- Corruption 2: missing required 'chain' column ---\n")
 bad2 <- draws_df[, c("draw", "param", "value")]
-tryCatch(
-    sch_validate(schema, bad2),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad2))
 
 cat("\n--- Corruption 3: duplicate (chain, draw, param) combo ---\n")
-# Replace draw 100 in chain 1 with draw 1 (duplicate)
 bad3 <- draws_df
 bad3$draw[bad3$chain == 1L & bad3$draw == 100L] <- 1L
-tryCatch(
-    sch_validate(schema, bad3),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad3))
 
 cat("\n--- Corruption 4: incomplete crossing (chain 2 missing log_lik) ---\n")
 bad4 <- draws_df[!(draws_df$chain == 2L & draws_df$param == "log_lik"), ]
-tryCatch(
-    sch_validate(schema, bad4),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad4))
 
 cat("\n--- Corruption 5: out-of-bounds draw number (draw = 0) ---\n")
 bad5 <- draws_df
 bad5$draw[bad5$chain == 1L & bad5$draw == 1L] <- 0L
-tryCatch(
-    sch_validate(schema, bad5),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema, bad5))
 
 cat("\n--- Corruption 6: NA in value column ---\n")
 bad6 <- draws_df
 bad6$value[1] <- NA_real_
 # value allows missing by default, so this should PASS
 sch_validate(schema, bad6)
-cat("(Passed — 'value' allows NAs by default)\n")
+cat("(Passed - 'value' allows NAs by default)\n")
 
 # Stricter schema that forbids NAs in value
 schema_strict <- sch_schema(
@@ -116,7 +99,4 @@ schema_strict <- sch_schema(
     value = sch_numeric("Parameter draw value", missing = FALSE)
 )
 
-tryCatch(
-    sch_validate(schema_strict, bad6),
-    error = function(e) message(conditionMessage(e))
-)
+try(sch_validate(schema_strict, bad6))
