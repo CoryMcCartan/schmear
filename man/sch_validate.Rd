@@ -48,12 +48,10 @@ schema <- sch_schema(
 df <- data.frame(id = 1:3, name = c("Alice", "Bob", "Carol"), age = c(25, NA, 30))
 sch_validate(schema, df)
 
-# Invalid, throw validation errors
-\dontrun{
+# Invalid data throws validation errors; wrap in try() so examples can run
 # missing required columns
-sch_validate(schema, data.frame(id = 1:2))
+try(sch_validate(schema, data.frame(id = 1:2)))
 
-# type constrains not satisfied
-sch_validate(schema, data.frame(id = c(1L, 1L), name = c("Alice", NA)))
-}
+# type constraints not satisfied
+try(sch_validate(schema, data.frame(id = c(1L, 1L), name = c("Alice", NA))))
 }
