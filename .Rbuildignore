@@ -11,3 +11,6 @@
 ^SUGGESTIONS\.md$
 ^REVIEW\.md$
 ^TODO\.md$
+^cran-comments\.md$
+^README\.html$
+^CRAN-SUBMISSION$

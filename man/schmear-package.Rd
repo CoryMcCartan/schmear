@@ -6,17 +6,26 @@
 \alias{schmear-package}
 \title{schmear: Build Structured Data Frame Subtypes}
 \description{
-Provides developer-focused helper functions and S3 classes to ease the creation of structured subtypes of data frames which require certain columns and types to be present, and which preserve special attributes through common data frame manipulations.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+Provides developer-focused helper functions and S3 classes to ease the creation of structured subtypes of data frames. Developers can require certain columns and types to be present, and can enforce crossing and nesting relationships between values in different columns. Type-specific metadata and attributes are preserved through common data frame manipulations.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{http://corymccartan.com/schmear/}
+  \item \url{https://corymccartan.com/schmear/}
+  \item \url{https://github.com/CoryMcCartan/schmear}
+  \item Report bugs at \url{https://github.com/CoryMcCartan/schmear/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Cory McCartan \email{mccartan@psu.edu} (\href{https://orcid.org/0000-0002-6251-669X}{ORCID})
+\strong{Maintainer}: Cory McCartan \email{mccartan@psu.edu} (\href{https://orcid.org/0000-0002-6251-669X}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Cory McCartan \email{mccartan@psu.edu} (\href{https://orcid.org/0000-0002-6251-669X}{ORCID}) [copyright holder]
+}
 
 }
 \keyword{internal}

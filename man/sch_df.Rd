@@ -13,31 +13,31 @@ validate_sch_df(x)
 \arguments{
 \item{data}{A data frame.}
 
-\item{schema}{A \code{sch_schema} object.}
+\item{schema}{A `sch_schema` object.}
 
 \item{groups}{A named list of character vectors of column names, for use
-with \code{\link[=sch_multiple]{sch_multiple()}}.}
+with [sch_multiple()].}
 
 \item{class}{Additional classes to add to the object, in addition to "sch_df" and tibble/data.frame classes.}
 
-\item{use_tbl}{If \code{TRUE}, the returned object will have tibble
-classes \code{tbl_df} and \code{tbl} in addition to \code{data.frame}. As a reminder,
-\code{tbl_df} affects the behavior of the object (slicing, row names, etc.),
-while \code{tbl} affects printing only.}
+\item{use_tbl}{If `TRUE`, the returned object will have tibble
+classes `tbl_df` and `tbl` in addition to `data.frame`. As a reminder,
+`tbl_df` affects the behavior of the object (slicing, row names, etc.),
+while `tbl` affects printing only.}
 
-\item{x}{A \code{sch_df} object.}
+\item{x}{A `sch_df` object.}
 }
 \value{
-A data frame with class \code{c(class, "sch_df", ...)} and attributes
-\code{sch_schema} and \code{sch_groups}.
+A data frame with class `c(class, "sch_df", ...)` and attributes
+  `sch_schema` and `sch_groups`.
 
 The input, if validation is successful.
 }
 \description{
 Bare-bones constructor for a data frame with an attached schema. This function
 should be called by package developers writing their own internal constructors.
-The only checks are for the types of \code{data} and \code{schema}.
-The \code{validate_sch_df()} is a lightweight wrapper around \code{\link[=sch_validate]{sch_validate()}} that
+The only checks are for the types of `data` and `schema`.
+The `validate_sch_df()` is a lightweight wrapper around [sch_validate()] that
 also returns the input.
 }
 \examples{

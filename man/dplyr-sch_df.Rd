@@ -5,56 +5,57 @@
 \title{dplyr integration for sch_df}
 \description{
 These methods hook into dplyr's three extension generics
-(\code{\link[dplyr:dplyr_extending]{dplyr::dplyr_row_slice()}}, \code{\link[dplyr:dplyr_extending]{dplyr::dplyr_col_modify()}},
-\code{\link[dplyr:dplyr_extending]{dplyr::dplyr_reconstruct()}}) plus the base-R \code{\link[=names]{names()}} replacement and
-1-d \code{[} to enforce schema constraints across dplyr operations with near-zero
+([dplyr::dplyr_row_slice()], [dplyr::dplyr_col_modify()],
+[dplyr::dplyr_reconstruct()]) plus the base-R [names()] replacement and
+1-d `[` to enforce schema constraints across dplyr operations with near-zero
 overhead.
 }
 \details{
-Each method calls \code{NextMethod()} first (performing the actual dplyr
+Each method calls `NextMethod()` first (performing the actual dplyr
 operation) and then re-validates the result against the schema, running only
-the checks that can plausibly be violated by that type of operation:\tabular{ll}{
-   Operation \tab Checks run \cr
-   \code{dplyr_row_slice} \tab none by default; \code{"relationships"} behind a flag \cr
-   \code{dplyr_col_modify} \tab \code{"names"}, \code{"types"}, \code{"distinct"} \cr
-   \code{dplyr_reconstruct} \tab \code{"names"}, \code{"types"} \cr
-   \code{[} (1-d column subsetting) \tab \code{"names"} \cr
-   \verb{names<-} \tab errors if any \emph{schema} column name is changed \cr
+the checks that can plausibly be violated by that type of operation:
+
+| Operation | Checks run |
+|---|---|
+| `dplyr_row_slice` | none by default; `"relationships"` behind a flag |
+| `dplyr_col_modify` | `"names"`, `"types"`, `"distinct"` |
+| `dplyr_reconstruct` | `"names"`, `"types"` |
+| `[` (1-d column subsetting) | `"names"` |
+| `names<-` | errors if any *schema* column name is changed |
 }
-}
-\section{Row slicing (\code{arrange}, \code{filter}, \code{slice}, semi/anti joins)}{
+\section{Row slicing (`arrange`, `filter`, `slice`, semi/anti joins)}{
 
 Row operations cannot introduce new name or type violations, so no
 validation is run by default. Relationship constraints (crossing
-completeness, primary-key uniqueness) \emph{can} be broken by removing rows.
-Pass \code{.check_relationships = TRUE} in \code{...} to opt in to that check.
+completeness, primary-key uniqueness) *can* be broken by removing rows.
+Pass `.check_relationships = TRUE` in `...` to opt in to that check.
 }
 
-\section{Column modification (\code{mutate})}{
+\section{Column modification (`mutate`)}{
 
-A column modification can delete required columns (via \code{NULL} assignment),
-assign the wrong type, or introduce duplicate values into a \code{distinct = TRUE}
+A column modification can delete required columns (via `NULL` assignment),
+assign the wrong type, or introduce duplicate values into a `distinct = TRUE`
 column, so all three cheap checks are run.
 }
 
 \section{Reconstruction (joins)}{
 
-\code{dplyr_reconstruct()} is called after joins. Only names and types are
+`dplyr_reconstruct()` is called after joins. Only names and types are
 checked: distinct and relationship checks are omitted because joins can
 intentionally produce non-distinct rows or incomplete crossings.
 }
 
-\section{Column subsetting (\code{select}, \code{relocate})}{
+\section{Column subsetting (`select`, `relocate`)}{
 
-A 1-d \code{[} call selects or reorders columns. Reordering is always safe; but
+A 1-d `[` call selects or reorders columns. Reordering is always safe; but
 selecting a column subset could drop required columns, so a names check is
 run.
 }
 
-\section{Renaming (\code{rename}, \code{rename_with}, \code{select} with rename)}{
+\section{Renaming (`rename`, `rename_with`, `select` with rename)}{
 
 Renaming a column that belongs to the schema (either directly or as a member
-of a \code{\link[=sch_multiple]{sch_multiple()}} group) is never valid without also updating the schema
+of a [sch_multiple()] group) is never valid without also updating the schema
 definition, so an error is raised immediately.
 }
 

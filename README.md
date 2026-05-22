@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# schmear <a href="http://corymccartan.com/schmear/"><img src="man/figures/logo.png" align="right" height="138" alt="schmear logo" /></a>
+# schmear <a href="https://corymccartan.com/schmear/"><img src="man/figures/logo.png" align="right" height="138" alt="schmear logo" /></a>
 
 <!-- badges: start -->
 
@@ -17,8 +17,14 @@ through common data frame manipulations.
 
 ## Installation
 
-You can install the development version of schmear from
-[GitHub](https://github.com/) with:
+You can install the released version of schmear from CRAN with:
+
+``` r
+install.packages("schmear")
+```
+
+You can install the development version from
+[GitHub](https://github.com/CoryMcCartan/schmear) with:
 
 ``` r
 # install.packages("pak")

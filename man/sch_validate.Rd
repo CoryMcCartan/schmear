@@ -12,29 +12,27 @@ sch_validate(
 )
 }
 \arguments{
-\item{schema}{A schema object created by \code{\link[=sch_schema]{sch_schema()}}.}
+\item{schema}{A schema object created by [sch_schema()].}
 
 \item{data}{A data frame to validate.}
 
 \item{check}{A character vector specifying which checks to perform. The
 default runs all checks. Possible values:
-\itemize{
-\item \code{"names"}: check for missing required columns and unexpected extra columns.
-\item \code{"types"}: check column types and missing-value (\code{NA}) constraints.
-\item \code{"distinct"}: check uniqueness constraints for columns marked
-\code{distinct = TRUE}. Relatively expensive.
-\item \code{"relationships"}: validate relationship formulas (primary-key uniqueness
-and crossing/nesting completeness). Relatively expensive.
-}}
+- `"names"`: check for missing required columns and unexpected extra columns.
+- `"types"`: check column types and missing-value (`NA`) constraints.
+- `"distinct"`: check uniqueness constraints for columns marked
+  `distinct = TRUE`. Relatively expensive.
+- `"relationships"`: validate relationship formulas (primary-key uniqueness
+  and crossing/nesting completeness). Relatively expensive.}
 
 \item{call}{The environment or call used for error reporting, passed to
-\code{\link[rlang:abort]{rlang::abort()}}. Useful when wrapping \code{sch_validate()} inside another
+[rlang::abort()]. Useful when wrapping `sch_validate()` inside another
 function so that the error points to the right place.}
 }
 \value{
-\code{data}, invisibly, if validation succeeds. Otherwise, an error of
-class \code{sch_validation_error} is raised with a formatted summary of all
-issues found.
+`data`, invisibly, if validation succeeds. Otherwise, an error of
+  class `sch_validation_error` is raised with a formatted summary of all
+  issues found.
 }
 \description{
 Checks that a data frame conforms to a schema, validating column presence,

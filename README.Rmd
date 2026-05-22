@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# schmear <a href="http://corymccartan.com/schmear/"><img src="man/figures/logo.png" align="right" height="138" alt="schmear logo" /></a>
+# schmear <a href="https://corymccartan.com/schmear/"><img src="man/figures/logo.png" align="right" height="138" alt="schmear logo" /></a>
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/CoryMcCartan/schmear/graph/badge.svg)](https://app.codecov.io/gh/CoryMcCartan/schmear)
@@ -27,7 +27,14 @@ manipulations.
 
 ## Installation
 
-You can install the development version of schmear from [GitHub](https://github.com/) with:
+You can install the released version of schmear from CRAN with:
+
+``` r
+install.packages("schmear")
+```
+
+You can install the development version from
+[GitHub](https://github.com/CoryMcCartan/schmear) with:
 
 ``` r
 # install.packages("pak")

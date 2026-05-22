@@ -114,24 +114,24 @@ sch_custom(
 )
 }
 \arguments{
-\item{...}{Column specifications, in the form of \code{col_name = col_type} pairs,
-where \code{col_type} is a call to a column type constructor listed here, such
-as \code{sch_numeric()}. Every type must be a kind of vector, i.e.,
-\code{\link[vctrs:vector-checks]{vctrs::obj_is_vector()}} must return \code{TRUE}.
+\item{...}{Column specifications, in the form of `col_name = col_type` pairs,
+  where `col_type` is a call to a column type constructor listed here, such
+  as `sch_numeric()`. Every type must be a kind of vector, i.e.,
+  [vctrs::obj_is_vector()] must return `TRUE`.
 
-All columns must be named, except for \code{sch_others()}, as described below,
-and \code{sch_multiple()}, which describes a group of columns sharing the same
-type. A named \code{sch_nest()} describes columns stored as a nested data frame.
+  All columns must be named, except for `sch_others()`, as described below,
+  and `sch_multiple()`, which describes a group of columns sharing the same
+  type. A named `sch_nest()` describes columns stored as a nested data frame.
 
-The special function \code{sch_others()} indicates the preferred location of
-other columns not explicitly mentioned in the schema. If no \code{sch_others()}
-appears, then other columns are not allowed.
-Trailing commas are permitted.}
+  The special function `sch_others()` indicates the preferred location of
+  other columns not explicitly mentioned in the schema. If no `sch_others()`
+  appears, then other columns are not allowed.
+  Trailing commas are permitted.}
 
 \item{.relationships}{An optional one-sided formula describing the structural
 relationships between values in different columns. Formulas can only involve
-named arguments to \code{...}. Use \code{*} to signify crossed levels, which will
-verify all combinations exist, \code{/} to signify nested levels, and \code{+} to create
+named arguments to `...`. Use `*` to signify crossed levels, which will
+verify all combinations exist, `/` to signify nested levels, and `+` to create
 compound keys (bundling columns into a single identifier).
 See the examples below.}
 
@@ -139,23 +139,23 @@ See the examples below.}
 The type contraints will be described separately and do not need to be
 included in the description.  For example for "age", the description might
 be "Age of the patient in years", not "Non-negative integer representing
-the age of the patient in years". For the overall \code{sch_schema}, the \code{desc}
+the age of the patient in years". For the overall `sch_schema`, the `desc`
 will be printed as part of the header for data frames implementing the
 schema, by default.}
 
-\item{missing}{If \code{TRUE}, the column may be contain missing values. Otherwise,
+\item{missing}{If `TRUE`, the column may be contain missing values. Otherwise,
 any missing values result in an error.}
 
-\item{required}{If \code{TRUE} (default), the group entry in \code{sch_groups} must
-contain at least one column name. If \code{FALSE}, an empty character vector
+\item{required}{If `TRUE` (default), the group entry in `sch_groups` must
+contain at least one column name. If `FALSE`, an empty character vector
 for that entry is also accepted.}
 
-\item{distinct}{If \code{TRUE}, the column must contain no duplicate values (after
+\item{distinct}{If `TRUE`, the column must contain no duplicate values (after
 accounting for nesting structure).}
 
 \item{name}{A name for the custom type.}
 
-\item{type}{A column type constructor (e.g. \code{\link[=sch_numeric]{sch_numeric()}}) specifying the
+\item{type}{A column type constructor (e.g. [sch_numeric()]) specifying the
 expected type of every column in the group.}
 
 \item{check}{A two-argument function that checks whether an object satisfies
@@ -169,20 +169,20 @@ about the type when passed the type object itself. Should not end with a period.
 type. The first argument is the object to coerce, and the second is the full
 type specification.}
 
-\item{bounds}{Length-two vector \code{c(min, max)} specifying the allowed range of values.}
+\item{bounds}{Length-two vector `c(min, max)` specifying the allowed range of values.}
 
 \item{closed}{Length-two logical vector specifying whether the bounds are
 closed (inclusive) or open (exclusive).}
 
 \item{levels}{A character vector of factor levels, or NULL not enforce specific levels.}
 
-\item{strict}{If \code{TRUE}, only factors with the specified levels are accepted.
-If \code{FALSE}, character vectors with the specified levels are also accepted.}
+\item{strict}{If `TRUE`, only factors with the specified levels are accepted.
+If `FALSE`, character vectors with the specified levels are also accepted.}
 
 \item{class}{A character vector of class names.}
 }
 \value{
-An object of class \code{sch_schema},
+An object of class `sch_schema`,
 }
 \description{
 Defines the structure of a single 'observation' for a structured data frame.
@@ -196,20 +196,20 @@ Schemas support nesting relationships.
 \item \code{sch_any()}: A column of any type. No type checking is performed.
 
 \item \code{sch_multiple()}: A group of multiple columns sharing the same type. The
-group is identified by \code{name}, which must appear as an entry in the
-\code{sch_groups} attribute of the data frame being validated. That entry is a
-character vector of column names that belong to this group.
+  group is identified by `name`, which must appear as an entry in the
+  `sch_groups` attribute of the data frame being validated. That entry is a
+  character vector of column names that belong to this group.
 
-Optionally accepts cross-column \code{check}, \code{msg}, and \code{coerce} functions that
-are applied to the entire group after per-column type checks pass. These
-must all be provided together or not at all.
+  Optionally accepts cross-column `check`, `msg`, and `coerce` functions that
+  are applied to the entire group after per-column type checks pass. These
+  must all be provided together or not at all.
 
-\code{sch_multiple()} must be unnamed in an \code{sch_schema()} call. Per-column
-constraints such as \code{missing} and \code{distinct} are set on the inner \code{type}
-argument.
+  `sch_multiple()` must be unnamed in an `sch_schema()` call. Per-column
+  constraints such as `missing` and `distinct` are set on the inner `type`
+  argument.
 
 \item \code{sch_nest()}: A set of columns stored as a nested list-column of
-data frames. Must be given a name in the outer \code{sch_schema()}.
+data frames. Must be given a name in the outer `sch_schema()`.
 
 \item \code{sch_numeric()}: A numeric vector that is optionally constrained to be
 within a certain range.
@@ -229,14 +229,14 @@ within a certain range.
 \item \code{sch_datetime()}: A POSIXct vector that is optionally constrained to be
 within a certain range.
 
-\item \code{sch_inherits()}: A list-column whose elements satisfy \verb{inherits(_, class)}.
+\item \code{sch_inherits()}: A list-column whose elements satisfy `inherits(_, class)`.
 
-\item \code{sch_list_of()}: A vector satisfying \verb{inherits(_, class)}.
+\item \code{sch_list_of()}: A vector satisfying `inherits(_, class)`.
 
 \item \code{sch_custom()}: A custom type defined by user-provided check, type message,
 and coercion functions. Additional named values to be stored along with the
-type specification may be passed via \code{...} and will be available to the
-check, message, and coercion function as elements of the \code{type} argument.
+type specification may be passed via `...` and will be available to the
+check, message, and coercion function as elements of the `type` argument.
 
 }}
 \examples{

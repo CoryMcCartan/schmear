@@ -7,42 +7,42 @@
 sch_coerce(schema, data, validate = TRUE, call = rlang::caller_env())
 }
 \arguments{
-\item{schema}{A schema object created by \code{\link[=sch_schema]{sch_schema()}}.}
+\item{schema}{A schema object created by [sch_schema()].}
 
 \item{data}{A data frame to coerce.}
 
-\item{validate}{If \code{TRUE} (default), \code{\link[=sch_validate]{sch_validate()}} is called on the
-coerced data after all columns have been processed. Set to \code{FALSE} to skip
+\item{validate}{If `TRUE` (default), [sch_validate()] is called on the
+coerced data after all columns have been processed. Set to `FALSE` to skip
 validation, which can be useful when you want to inspect the coerced result
 before checking constraints.}
 
 \item{call}{The environment or call used for error reporting, passed to
-\code{\link[rlang:abort]{rlang::abort()}}. Useful when wrapping \code{sch_coerce()} inside another
+[rlang::abort()]. Useful when wrapping `sch_coerce()` inside another
 function so that errors point to the right place.}
 }
 \value{
-\code{data} with columns coerced to their schema types, invisibly, if
-coercion succeeds. If any column cannot be coerced, an error of class
-\code{sch_coercion_error} is raised with a summary of all failures. When
-\code{validate = TRUE}, a subsequent \code{\link[=sch_validate]{sch_validate()}} call may also raise a
-\code{sch_validation_error} if the coerced data still violates schema
-constraints (e.g., out-of-bounds values or uniqueness violations).
+`data` with columns coerced to their schema types, invisibly, if
+  coercion succeeds. If any column cannot be coerced, an error of class
+  `sch_coercion_error` is raised with a summary of all failures. When
+  `validate = TRUE`, a subsequent [sch_validate()] call may also raise a
+  `sch_validation_error` if the coerced data still violates schema
+  constraints (e.g., out-of-bounds values or uniqueness violations).
 }
 \description{
-Attempts to coerce each column of \code{data} to the type expected by \code{schema},
+Attempts to coerce each column of `data` to the type expected by `schema`,
 using the coercion method defined for each column type. After coercion,
-optionally validates the result with \code{\link[=sch_validate]{sch_validate()}}.
+optionally validates the result with [sch_validate()].
 }
 \details{
-Coercion is applied column-by-column using the \code{coerce} function registered
-for each type in the internal \code{type_fns} registry. For example, a column
-specified as \code{sch_integer()} will be coerced with \code{\link[=as.integer]{as.integer()}}. Nested
-schemas (created with \code{\link[=sch_nest]{sch_nest()}}) are handled by recursing into each
-element data frame, and grouped columns (created with \code{\link[=sch_multiple]{sch_multiple()}}) have
+Coercion is applied column-by-column using the `coerce` function registered
+for each type in the internal `type_fns` registry. For example, a column
+specified as `sch_integer()` will be coerced with [as.integer()]. Nested
+schemas (created with [sch_nest()]) are handled by recursing into each
+element data frame, and grouped columns (created with [sch_multiple()]) have
 each member column coerced individually.
 
-Columns present in \code{data} but not named in \code{schema} (i.e., those covered by
-\code{\link[=sch_others]{sch_others()}}) are left untouched.
+Columns present in `data` but not named in `schema` (i.e., those covered by
+[sch_others()]) are left untouched.
 }
 \examples{
 schema <- sch_schema(
