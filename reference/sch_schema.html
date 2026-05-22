@@ -280,6 +280,22 @@ and coercion functions. Additional named values to be stored along with the
 type specification may be passed via `...` and will be available to the
 check, message, and coercion function as elements of the `type` argument.</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="worked-examples">Worked examples<a class="anchor" aria-label="anchor" href="#worked-examples"></a></h2>
+
+
+<p>Three larger end-to-end example scripts are bundled with the package and
+show how to build a schema, attach group metadata, validate a compliant
+data frame, and exercise a range of corruption cases. List them with:</p>
+<p>“`r
+list.files(system.file("examples", package = "schmear"), full.names = TRUE)
+“`</p>
+<p>The included scripts are `mcmc_draws.R` (fully-crossed MCMC posterior
+draws), `ei_spec.R` (an ecological-inference specification using
+[sch_multiple()] groups with a row-sum cross-column check), and
+`election_data.R` (tidy election returns with a compound primary key and
+nested/crossed relationship structure).</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>

@@ -60,12 +60,15 @@ schema <- sch_schema(
 df <- data.frame(id = 1:3, name = c("Alice", "Bob", "Carol"), age = c(25, NA, 30))
 sch_validate(schema, df)
 
-# Invalid, throw validation errors
-if (FALSE) { # \dontrun{
+# Invalid data throws validation errors; wrap in try() so examples can run
 # missing required columns
-sch_validate(schema, data.frame(id = 1:2))
+try(sch_validate(schema, data.frame(id = 1:2)))
+#> Error in eval(expr, envir) : Data validation failed with 1 issue:
+#> ✖ Required column name is missing. Expected a character vector.
 
-# type constrains not satisfied
-sch_validate(schema, data.frame(id = c(1L, 1L), name = c("Alice", NA)))
-} # }
+# type constraints not satisfied
+try(sch_validate(schema, data.frame(id = c(1L, 1L), name = c("Alice", NA))))
+#> Error in eval(expr, envir) : Data validation failed with 2 issues:
+#> ✖ Column name must not contain missing values.
+#> ✖ Column id must not contain duplicate values.
 ```
