@@ -8,6 +8,8 @@
 [![Codecov test
 coverage](https://codecov.io/gh/CoryMcCartan/schmear/graph/badge.svg)](https://app.codecov.io/gh/CoryMcCartan/schmear)
 [![R-CMD-check](https://github.com/CoryMcCartan/schmear/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/CoryMcCartan/schmear/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/schmear)](https://CRAN.R-project.org/package=schmear)
 <!-- badges: end -->
 
 Provides developer-focused helper functions and S3 classes to ease the
