@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/CoryMcCartan/schmear/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/CoryMcCartan/schmear/blob/v0.1.0/DESCRIPTION)
 
 McCartan C (2026). *schmear: Build Structured Data Frame Subtypes*. R
 package version 0.1.0, <https://corymccartan.com/schmear/>.
